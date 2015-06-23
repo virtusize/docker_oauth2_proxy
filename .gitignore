@@ -1,0 +1,19 @@
+syntax: glob
+
+.idea/**
+
+*~
+*.egg-info
+*.egg
+.env
+*.pyc
+*.db
+*.lock
+*.cache
+*.log
+*.zip
+*.gz
+*.csv
+.DS_Store
+.pip_installed
+
