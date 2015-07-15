@@ -1,17 +1,19 @@
-FROM debian:jessie
 
-ENV OAUTH2_PROXY_VERSION=oauth2_proxy-2.0.linux-amd64.go1.4.2
+FROM buildpack-deps:jessie-curl
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-        curl \
-        ca-certificates && \
-    curl \
+ENV OAUTH2_PROXY_VERSION=2.0.1
+ENV GOLANG_VERSION=1.4.2
+ENV ARCHIVE=oauth2_proxy-$OAUTH2_PROXY_VERSION.linux-amd64.go$GOLANG_VERSION
+
+RUN curl \
         -L -k --silent \
-        https://github.com/bitly/oauth2_proxy/releases/download/v2.0/$OAUTH2_PROXY_VERSION.tar.gz  | tar xz -C / && \
+        https://github.com/bitly/oauth2_proxy/releases/download/v$OAUTH2_PROXY_VERSION/$ARCHIVE.tar.gz  | tar xz -C / && \
     mkdir /oauth2_proxy_conf && \
-    mv /$OAUTH2_PROXY_VERSION /oauth2_proxy && \
-    rm -rf /var/lib/apt/lists/*
+    mv /$ARCHIVE /oauth2_proxy
+
+RUN groupadd -r oauth2_proxy && useradd -r -g oauth2_proxy oauth2_proxy
+
+USER oauth2_proxy
 
 WORKDIR /oauth2_proxy
 
