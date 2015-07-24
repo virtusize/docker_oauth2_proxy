@@ -1,4 +1,3 @@
-
 FROM buildpack-deps:jessie-curl
 
 ENV OAUTH2_PROXY_VERSION=2.0.1
