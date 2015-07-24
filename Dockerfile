@@ -11,10 +11,6 @@ RUN curl \
     mkdir /oauth2_proxy_conf && \
     mv /$ARCHIVE /oauth2_proxy
 
-RUN groupadd -r oauth2_proxy && useradd -r -g oauth2_proxy oauth2_proxy
-
-USER oauth2_proxy
-
 WORKDIR /oauth2_proxy
 
 # Make sure you provide a config file in /oauth2_proxy_conf/oauth2_proxy.cfg
