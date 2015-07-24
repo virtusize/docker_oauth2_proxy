@@ -1,12 +1,12 @@
 NAME = virtusize/docker_oauth2_proxy
 VERSION ?= unprivileged-user
 
-.PHONY: all build
+.PHONY: all build push
 
 all: build
 
 build:
-	 docker build -t $(NAME):$(VERSION) .
+	docker build -t $(NAME):$(VERSION) .
 
 push:
 	docker push $(NAME):$(VERSION)
